@@ -15,7 +15,7 @@ contract TestToken {
     constructor(string _symbol, uint8 _decimals, uint _totalSupply) public {
         symbol = _symbol;
         decimals = _decimals;
-        totalSupply = _totalSupply;
+        totalSupply = _totalSupply.mul(1*10**decimals);
         totalSold = 0;
     }
 
@@ -24,8 +24,8 @@ contract TestToken {
       require(msg.value >= tokenPrice);
 
       uint tokens = msg.value.div(tokenPrice);
-      totalSold = totalSold.add(tokens);
       tokens = tokens.mul(1 * 10**decimals);
+      totalSold = totalSold.add(tokens);
       balances[msg.sender] = balances[msg.sender].add(tokens);
 
       require(totalSold <= totalSupply);
