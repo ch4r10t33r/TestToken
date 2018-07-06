@@ -24,8 +24,8 @@ contract TestToken {
       require(msg.value >= tokenPrice);
 
       uint tokens = msg.value.div(tokenPrice);
-      tokens = tokens.mul(1 * 10**decimals);
       totalSold = totalSold.add(tokens);
+      tokens = tokens.mul(1 * 10**decimals);
       balances[msg.sender] = balances[msg.sender].add(tokens);
 
       require(totalSold <= totalSupply);
@@ -38,6 +38,7 @@ contract TestToken {
     function balanceOf(address who) public view returns (uint256) {
         return balances[who];
     }
+
     function transfer(address to, uint256 value) public returns (bool) {
         require(to != address(0));
         require(value <= balances[msg.sender]);
